@@ -6,6 +6,8 @@
 
 # Parallax Website
 
+**[Live Demo ↗](https://parallax-website-beta-pearl.vercel.app/)**
+
 A layered motion study built around depth, atmosphere and pointer-driven interaction.
 
 The scene is assembled from individual mountain, fog and lighting layers. Each one moves at its own speed and perspective depth, creating a responsive sense of space while **GSAP** handles the opening choreography.
