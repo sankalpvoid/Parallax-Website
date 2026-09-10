@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="640" viewBox="0 0 1400 640" role="img" aria-label="Parallax Website — layered depth experiment">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071014"/><stop offset="1" stop-color="#0b1118"/></linearGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#5eead4"/><stop offset=".55" stop-color="#7dd3fc"/><stop offset="1" stop-color="#9b87f5"/></linearGradient>
+<radialGradient id="glow" cx="76%" cy="45%" r="60%"><stop stop-color="#38bdf8" stop-opacity=".22"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></radialGradient>
+<pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#fff" stroke-opacity=".025"/></pattern>
+</defs>
+<rect width="1400" height="640" rx="32" fill="url(#bg)"/><rect width="1400" height="640" rx="32" fill="url(#grid)"/><rect width="1400" height="640" rx="32" fill="url(#glow)"/><rect x="1" y="1" width="1398" height="638" rx="31" fill="none" stroke="#fff" stroke-opacity=".08"/>
+<text x="76" y="92" fill="#61717b" font-family="ui-monospace,monospace" font-size="15" letter-spacing="4">02 / DEPTH STUDY</text>
+<text x="76" y="220" fill="#f4fbfd" font-family="Inter,system-ui,sans-serif" font-size="90" font-weight="800" letter-spacing="-4">PARALLAX</text>
+<text x="80" y="275" fill="#a0adb5" font-family="Inter,system-ui,sans-serif" font-size="24">pointer × perspective × atmosphere</text>
+<text x="80" y="344" fill="#71808a" font-family="Inter,system-ui,sans-serif" font-size="18">layered mountains · fog systems · translateZ depth · GSAP entrance motion</text>
+<g transform="translate(80 406)"><rect width="150" height="42" rx="21" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".07"/><text x="75" y="27" text-anchor="middle" fill="#c6d5dc" font-family="ui-monospace,monospace" font-size="12">JAVASCRIPT</text></g>
+<g transform="translate(242 406)"><rect width="136" height="42" rx="21" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".07"/><text x="68" y="27" text-anchor="middle" fill="#c6d5dc" font-family="ui-monospace,monospace" font-size="12">GSAP</text></g>
+<g transform="translate(390 406)"><rect width="164" height="42" rx="21" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".07"/><text x="82" y="27" text-anchor="middle" fill="#c6d5dc" font-family="ui-monospace,monospace" font-size="12">PERSPECTIVE</text></g>
+<g transform="translate(865 125)">
+<path d="M0 265L120 102L214 193L300 63L430 265Z" fill="#0c1b23" stroke="#5eead4" stroke-opacity=".23"/>
+<path d="M12 292L132 150L229 226L312 112L440 292Z" fill="#0b1621" stroke="#7dd3fc" stroke-opacity=".22"/>
+<path d="M24 319L145 202L242 257L325 165L451 319Z" fill="#0a121d" stroke="#9b87f5" stroke-opacity=".24"/>
+<circle cx="335" cy="74" r="42" fill="#7dd3fc" fill-opacity=".08" stroke="#7dd3fc" stroke-opacity=".2"/>
+<path d="M34 236C138 197 284 213 433 176" fill="none" stroke="url(#accent)" stroke-width="3" stroke-opacity=".5"/>
+</g>
+<line x1="80" y1="548" x2="1320" y2="548" stroke="url(#accent)" stroke-opacity=".4"/>
+<text x="80" y="584" fill="#56636b" font-family="ui-monospace,monospace" font-size="12" letter-spacing="2">SANKALPVOID / INTERACTION STUDY</text>
+<text x="1320" y="584" text-anchor="end" fill="#526a73" font-family="ui-monospace,monospace" font-size="12" letter-spacing="2">MOVE TO SHIFT DEPTH</text>
+</svg>
