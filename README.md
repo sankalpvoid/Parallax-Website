@@ -1,22 +1,24 @@
 <div align="center">
   <img src="./assets/cover.svg" width="100%" alt="Parallax Website — layered depth experiment" />
-</div>
 
-<br>
+  <br />
+
+  <a href="https://parallax-website-beta-pearl.vercel.app/"><b>Live Demo ↗</b></a>
+  &nbsp;·&nbsp;
+  <a href="https://sankalpvoid-folio.vercel.app/#work"><b>Portfolio ↗</b></a>
+</div>
 
 # Parallax Website
 
-**[Live Demo ↗](https://parallax-website-beta-pearl.vercel.app/)**
+A layered interaction study exploring how depth, atmosphere and pointer movement can make a flat browser scene feel spatial.
 
-A layered motion study built around depth, atmosphere and pointer-driven interaction.
+The composition is assembled from separate mountain, fog and lighting layers. Each layer responds at a different speed and perspective depth, while **GSAP** handles the opening choreography.
 
-The scene is assembled from individual mountain, fog and lighting layers. Each one moves at its own speed and perspective depth, creating a responsive sense of space while **GSAP** handles the opening choreography.
-
-## What I explored
+## Highlights
 
 - multi-layer pointer-driven parallax
 - perspective and `translateZ` depth
-- rotation based on cursor position
+- subtle rotation derived from pointer position
 - independent movement speeds for scene layers
 - GSAP entrance choreography
 - responsive depth behavior across viewport sizes
@@ -25,10 +27,14 @@ The scene is assembled from individual mountain, fog and lighting layers. Each o
 
 `HTML` · `CSS` · `JavaScript` · `GSAP` · `Parallax` · `Perspective`
 
-## Why this exists
+## What I learned
 
-The goal was to understand how a flat browser canvas can feel spatial — using **motion hierarchy, depth cues and layered composition** rather than heavy 3D tooling.
+The experiment focuses on creating perceived depth without heavy 3D tooling. **Motion hierarchy, depth cues and layered composition** do most of the work, showing how relatively simple transforms can produce a convincing sense of physical space.
+
+## Explore
+
+**[Open the live experiment ↗](https://parallax-website-beta-pearl.vercel.app/)** · **[See more work ↗](https://sankalpvoid-folio.vercel.app/#work)**
 
 ---
 
-<sub>interaction study / <a href="https://github.com/sankalpvoid">sankalpvoid</a></sub>
+<sub>interaction study · built by <a href="https://github.com/sankalpvoid">sankalpvoid</a></sub>
