@@ -1,121 +1,87 @@
-const parallax_el = document.querySelectorAll(".parallax");
-const main = document.querySelector("main");
+const parallaxElements = document.querySelectorAll('.parallax');
+const main = document.querySelector('main');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const supportsFinePointer = window.matchMedia('(pointer: fine)').matches;
 
 let xValue = 0;
 let yValue = 0;
 let rotateDegree = 0;
+let timeline;
 
-function update(curserPosition) {
-  parallax_el.forEach((el) => {
-    let speedx = el.dataset.speedx;
-    let speedy = el.dataset.speedy;
-    let speedz = el.dataset.speedz;
-    let rotateSpeed = el.dataset.rotation;
-    let isInLeft =
-      parseFloat(getComputedStyle(el).left) < window.innerWidth / 2 ? 1 : -1;
-    let zValue =
-      (curserPosition - parseFloat(getComputedStyle(el).left)) * isInLeft * 0.1;
+function updateScene(pointerX = window.innerWidth / 2) {
+  parallaxElements.forEach((el) => {
+    const speedX = Number(el.dataset.speedx || 0);
+    const speedY = Number(el.dataset.speedy || 0);
+    const speedZ = Number(el.dataset.speedz || 0);
+    const rotateSpeed = Number(el.dataset.rotation || 0);
+    const computedLeft = parseFloat(getComputedStyle(el).left) || window.innerWidth / 2;
+    const isInLeft = computedLeft < window.innerWidth / 2 ? 1 : -1;
+    const zValue = (pointerX - computedLeft) * isInLeft * 0.1;
 
-    
-      // console.log(+el.dataset.distance);
-    el.style.transform = `translateX(calc(-50% + ${
-      -xValue * speedx
-    }px)) translateY(calc(-50% + ${
-      yValue * speedy
-    }px)) perspective(2300px) translateZ(${zValue * speedz}px) rotateY(${
-      rotateDegree * rotateSpeed
-    }deg)`;
+    el.style.transform = `translateX(calc(-50% + ${-xValue * speedX}px)) translateY(calc(-50% + ${yValue * speedY}px)) perspective(2300px) translateZ(${zValue * speedZ}px) rotateY(${rotateDegree * rotateSpeed}deg)`;
   });
 }
 
-update(0);
+function resetScene() {
+  xValue = 0;
+  yValue = 0;
+  rotateDegree = 0;
+  updateScene(window.innerWidth / 2);
+}
 
-window.addEventListener("mousemove", (e) => {
-  if(timeline.isActive()) return;
+function handlePointerMove(event) {
+  if (prefersReducedMotion || !supportsFinePointer || timeline?.isActive()) return;
 
-  xValue = e.clientX - window.innerWidth / 2;
-  yValue = e.clientY - window.innerHeight / 2;
-  rotateDegree = (xValue / (window.innerWidth / 2)) * 20;
+  xValue = event.clientX - window.innerWidth / 2;
+  yValue = event.clientY - window.innerHeight / 2;
+  rotateDegree = (xValue / Math.max(window.innerWidth / 2, 1)) * 16;
+  updateScene(event.clientX);
+}
 
-  // console.log(xValue, yValue);
-  update(e.clientX);
+function buildIntroAnimation() {
+  timeline?.kill();
+  gsap.set('.parallax, .text h1, .text h2, .hide', { clearProps: 'transform,opacity' });
+
+  if (prefersReducedMotion) {
+    resetScene();
+    return;
+  }
+
+  const travelScale = window.innerWidth < 700 ? 0.35 : 1;
+  timeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+  parallaxElements.forEach((el) => {
+    const distance = Number(el.dataset.distance || 0);
+    timeline.from(
+      el,
+      {
+        y: (window.innerHeight + distance) * travelScale,
+        duration: window.innerWidth < 700 ? 1.6 : 3.2,
+      },
+      'scene'
+    );
+  });
+
+  timeline
+    .from('.text h1', { y: window.innerWidth < 700 ? 70 : 200, opacity: 0, duration: 1.4 }, 'title')
+    .from('.text h2', { y: -70, opacity: 0, duration: 1.2 }, 'title')
+    .from('.hide', { opacity: 0, duration: 1.5 }, 'title+=0.15')
+    .eventCallback('onComplete', resetScene);
+}
+
+window.addEventListener('pointermove', handlePointerMove, { passive: true });
+window.addEventListener('pointerleave', () => {
+  if (!timeline?.isActive()) resetScene();
 });
 
-
-  if(window.innerWidth>=725){
-    main.style.maxHeight= `${window.innerWidth*0.6}px`;
-  }
-  else{
-    main.style.maxHeight= `${window.innerWidth*1.6}px`;
-  }
-
-
-//GSAP Animation
-
-let timeline = gsap.timeline();
-
-// Array.from(parallax_el).filter(el => !el.classList.contains("text")).forEach((el) =>{
-//   timeline.from(el, {
-//     top: `${el.offsetHeight / 2 + +el.dataset.distance}px`,
-//     duration: 3.5,
-//     ease: "power3.out", 
-//   },
-// "1");
-// });
-
-parallax_el.forEach((el) =>{
-  timeline.from(el, {
-    // top: `${el.offsetHeight / 2 + +el.dataset.distance}px`,
-    y: window.innerHeight - document.querySelector(".parallax").getBoundingClientRect().top + +el.dataset.distance,
-    duration: 3.5,
-    ease: "power3.out", 
-  },
-"1");
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    resetScene();
+  }, 120);
 });
 
+main.addEventListener('touchmove', resetScene, { passive: true });
 
-
-// timeline.from(
-//   ".parallax",
-//   {
-//     y:
-//       window.innerHeight - document.querySelector(".parallax").getBoundingClientRect().top +200,
-//     duration: 3.5,
-//     ease: "power3.out", 
-//   },
-//   "0.1"
-// );
-
-timeline.from(
-    ".text h1",
-    {
-      y:
-        window.innerHeight - document.querySelector(".text h1").getBoundingClientRect().top +200,
-      duration: 2,
-    },
-    "3"
-  )
-  .from(
-    ".text h2",
-    {
-      y: -150,
-      opacity: 0,
-      duration: 2,
-    },
-    "3"
-  )
-  .from(
-    ".hide",
-    {
-      opacity: 0,
-      duration: 3,
-    },
-    "3"
-  );
-
-
-
-
-
-
-  
+buildIntroAnimation();
